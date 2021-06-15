@@ -1,4 +1,4 @@
-#React Practice File
+# React Practice File
 
 The main purpose of this is just practice, test different React.js logic, code, hooks, etc.
 
