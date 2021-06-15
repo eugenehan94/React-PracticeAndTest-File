@@ -1,39 +1,19 @@
-import React, { useState, useEffect, useRef, useReducer } from "react";
-
-const reducer = (state, action) => {};
+import React, { useReducer } from "react";
 
 function App() {
-  const [name, setName] = useState("");
-
-  const [state, dispatch] = useReducer(reducer);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (name) {
-      setShowModal(true);
-      setPeople([...people]);
-
-      setName("");
-    } else {
-      setShowModal(true);
-    }
-  };
-
+  const [sum, dispatch] = useReducer((state, action) => {
+    return state + action;
+  }, 0);
   return (
     <>
-      {showModal && "Modal should appear"}
-      <h1>Title</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <button type="submit">Add</button>
-      </form>
+      {sum}
+      <button
+        onClick={() => {
+          dispatch(1);
+        }}
+      >
+        Add 1
+      </button>
     </>
   );
 }
