@@ -1,3 +1,10 @@
+# React Practice File
+
+The main purpose of this is just practice, test different React.js logic, code, hooks, etc.
+
+---------------------------------------------------------------------------------------------------------
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
