@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, useRef, useReducer } from "react";
+
+const reducer = (state, action) => {};
 
 function App() {
+  const [name, setName] = useState("");
+
+  const [state, dispatch] = useReducer(reducer);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (name) {
+      setShowModal(true);
+      setPeople([...people]);
+
+      setName("");
+    } else {
+      setShowModal(true);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {showModal && "Modal should appear"}
+      <h1>Title</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <button type="submit">Add</button>
+      </form>
+    </>
   );
 }
 
