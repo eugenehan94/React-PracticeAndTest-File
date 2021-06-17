@@ -2,7 +2,7 @@ import React, { useReducer, useRef } from "react";
 
 function App() {
   const inputRef = useRef();
-  const [state, dispatch] = useReducer(reducer, initialState);
+  // const [state, dispatch] = useReducer(reducer, initialState);
   const [items, dispatch] = useReducer((state, action) => {
     switch (action.type) {
       case "add":
