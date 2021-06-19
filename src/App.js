@@ -1,38 +1,24 @@
 import React, { useReducer, useRef } from "react";
 
-function App() {
-  const inputRef = useRef();
-  // const [state, dispatch] = useReducer(reducer, initialState);
-  const [items, dispatch] = useReducer((state, action) => {
-    switch (action.type) {
-      case "add":
-        return [...state, { id: state.length, name: action.name }];
-      default:
-        return state;
-    }
-  }, []);
+const initialState = 0;
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch({
-      type: "add",
-      name: inputRef.current.value,
-    });
-    inputRef.current.value = "";
+const reducer = (state, action) => {
+  if (action.type == "Increase") {
+    console.log(state + 1);
+    return state + 1;
   }
+  console.log("If statement not touched");
+  return state;
+};
 
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input ref={inputRef}></input>
-      </form>
-
-      <ul>
-        {items.map((item, index) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
-    </>
+    <div>
+      <h1>title</h1>
+      <button onClick={() => dispatch({ type: "Increas" })}>Click</button>
+      <p>Here is the state: {state} </p>
+    </div>
   );
 }
 
