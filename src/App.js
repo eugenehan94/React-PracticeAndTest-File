@@ -1,17 +1,17 @@
 import React, { useReducer, useRef } from "react";
 
-const initialAmount = 0;
-
-const ree = (state, action) => {};
-
 function App() {
-  const [state, dispatch] = useReducer(ree, initialAmount);
+  const nums = [2, 4, 6];
+  const initialState = 0;
+  const total = nums.reduce(reducer, initialState);
+
+  function reducer(state, value) {
+    return state + value;
+  }
 
   return (
     <>
       <h1>Title</h1>
-      <button onClick={() => dispatch({ type: "plus" })}>Increase</button>
-      <button onClick={() => dispatch({ type: "minus" })}>Decrease</button>
     </>
   );
 }
