@@ -1,13 +1,19 @@
 import React, { useReducer, useRef } from "react";
 
-function App() {
-  const nums = [2, 4, 6];
-  const initialState = 0;
-  const total = nums.reduce(reducer, initialState);
+const initialState = {
+  count1: 0,
+  count2: 0,
+};
 
-  function reducer(state, value) {
-    return state + value;
+const reducer = (state, action) => {
+  switch(action.type) {
+    case 
   }
+}
+
+
+function App() {
+  const [count, dispatch] = useReducer(reducer, initialState);
 
   return (
     <>
