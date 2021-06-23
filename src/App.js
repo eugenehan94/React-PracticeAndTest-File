@@ -1,53 +1,47 @@
-import React, { useReducer, useRef } from "react";
+import React, { useState, useReducer, useRef, useContext } from "react";
 
-const initialState = {
-  count1: 0,
-  count2: 0,
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "increment1":
-      return { ...state, count1: state.count1 + 1 };
-    case "decrement1":
-      return { ...state, count1: state.count1 - 1 };
-    case "set1":
-      return { ...state, count1: action.count };
-    case "increment2":
-      return { ...state, count2: state.count2 + 1 };
-    case "decrement2":
-      return { ...state, count2: state.count2 - 1 };
-    case "set2":
-      return { ...state, count2: action.count };
-    default:
-      throw new Error("unexpected action");
-  }
-};
+const someContext = React.createContext();
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [number, setNumber] = useState(541);
 
   return (
     <>
-      <h1>Title</h1>
-      <div>
-        {state.count1}
-        <button onClick={() => dispatch({ type: "increment1" })}>+1</button>
-        <button onClick={() => dispatch({ type: "decrement1" })}>-1</button>
-        <button onClick={() => dispatch({ type: "set1", count: 0 })}>
-          Reset
-        </button>
-      </div>
-      <div>
-        {state.count2}
-        <button onClick={() => dispatch({ type: "increment2" })}>+1</button>
-        <button onClick={() => dispatch({ type: "decrement2" })}>-1</button>
-        <button onClick={() => dispatch({ type: "set2", count: 0 })}>
-          Reset
-        </button>
-      </div>
+      <someContext.Provider value={number}>
+        <h1>Title</h1>
+        <button onClick={() => setNumber(number + 1)}>Increase Number</button>
+        <Level1 />
+      </someContext.Provider>
     </>
   );
 }
 
 export default App;
+
+const Level1 = () => {
+  return (
+    <>
+      <h2>This is level 1</h2>
+      <Level2></Level2>
+    </>
+  );
+};
+
+const Level2 = () => {
+  return (
+    <>
+      <h2>This is level 2</h2>
+      <Level3 />
+    </>
+  );
+};
+
+const Level3 = () => {
+  const number = useContext(someContext);
+  return (
+    <>
+      <h2>This is level 3</h2>
+      <p>This is the data: {number}</p>
+    </>
+  );
+};
