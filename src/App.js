@@ -12,78 +12,28 @@ import {
 // import Error from "./Error";
 // import Navbar from "./Navbar";
 function App() {
-  return (
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/topics">Topics</Link>
-          </li>
-        </ul>
+  const refContainer = useRef(null);
 
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/topics">
-            <Topics />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(refContainer.current.value);
+  };
+
+  console.log("This is outside the return " + refContainer.current);
+  console.log(refContainer.current === null);
+  return (
+    <div>
+      <h1>Title</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input type="text" ref={refContainer}></input>
+          <button type="sumbit">
+            {refContainer.current === null ? "refContainer is null" : "submit"}
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
 export default App;
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
-
-function Topics() {
-  let { path, url } = useRouteMatch();
-  console.log(path);
-  console.log(url);
-  return (
-    <div>
-      <h2>Topics</h2>
-      <ul>
-        <li>
-          <Link to={`${url}/rendering`}>Rendering with react</Link>
-        </li>
-        <li>
-          <Link to={`${url}/components`}>Components</Link>
-        </li>
-        <li>
-          <Link to={`${url}/props-v-state`}>Props v. State</Link>
-        </li>
-      </ul>
-
-      <Switch>
-        <Route exact path={path}>
-          <h3>Please select a topic</h3>
-        </Route>
-        <Route path={`${path}/:topicId`}>
-          <Topic />
-        </Route>
-      </Switch>
-    </div>
-  );
-}
-
-function Topic() {
-  let { topicId } = useParams();
-  console.log(topicId);
-  return (
-    <div>
-      <h3>{topicId}</h3>
-    </div>
-  );
-}
