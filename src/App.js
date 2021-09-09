@@ -1,21 +1,22 @@
-import React, { useState, useReducer, useRef, useContext } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
-
-import "./App.css";
+import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 function App() {
+  const [markdown, setMarkdown] = useState("# Title");
+
   return (
-    <div>
-      <h1>Title</h1>
-      <div className="loader"></div>
-    </div>
+    <main>
+      <section className="markdown">
+        <textarea
+          className="input"
+          value={markdown}
+          onChange={(e) => setMarkdown(e.target.value)}
+        ></textarea>
+        <article className="result">
+          <ReactMarkdown>{markdown}</ReactMarkdown>
+        </article>
+      </section>
+    </main>
   );
 }
 
