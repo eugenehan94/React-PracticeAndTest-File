@@ -1,11 +1,8 @@
-import counterReducer from "./counter";
-import loggedReducer from "./isLogged";
-
 import { combineReducers } from "redux";
+import todos from "./todo";
+import visibilityFilter from "./visibilityFilter";
 
-const allReducers = (combineReducers) => ({
-  counter: counterReducer,
-  isLogged: loggedReducer,
+export default combineReducers({
+  todos,
+  visibilityFilter,
 });
-
-export default allReducers;
