@@ -1,56 +1,21 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import ImageList from "@material-ui/core/ImageList";
-import ImageListItem from "@material-ui/core/ImageListItem";
-import itemData from "./itemData";
+import axios from "axios";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-    backgroundColor: "theme.palette.background.paper",
-  },
-  imageList: {
-    width: "100%",
-    height: "100%",
-  },
-}));
-
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const itemData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *     cols: 2,
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
+const baseURL = "https://jsonplaceholder.typicode.com/posts/1";
 
 const App = () => {
-  const classes = useStyles();
+  const [post, setPost] = React.useState(null);
+  const clickHandler = () => {};
 
-  return (
-    <div className={classes.root}>
-      <ImageList rowHeight={160} className={classes.imageList}>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img} cols={item.cols || 1}>
-            <img src={item.img} alt={item.title} />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </div>
-  );
+  if (!post)
+    return (
+      <div>
+        {" "}
+        <button onClick={() => clickHandler()}>Click to get</button>
+      </div>
+    );
+
+  return <div></div>;
 };
 
 export default App;
