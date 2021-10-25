@@ -1,21 +1,44 @@
 import React from "react";
-import axios from "axios";
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
 
-const baseURL = "https://jsonplaceholder.typicode.com/posts/1";
+export default function PositionedSnackbar() {
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
 
-const App = () => {
-  const [post, setPost] = React.useState(null);
-  const clickHandler = () => {};
+  const { vertical, horizontal, open } = state;
 
-  if (!post)
-    return (
-      <div>
-        {" "}
-        <button onClick={() => clickHandler()}>Click to get</button>
-      </div>
-    );
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
 
-  return <div></div>;
-};
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
 
-export default App;
+  const buttons = (
+    <React.Fragment>
+      <Button
+        onClick={handleClick({ vertical: "bottom", horizontal: "center" })}
+      >
+        Bottom-Center
+      </Button>
+    </React.Fragment>
+  );
+
+  return (
+    <div>
+      {buttons}
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="I love snacks"
+        key={vertical + horizontal}
+      />
+    </div>
+  );
+}
