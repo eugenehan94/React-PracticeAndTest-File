@@ -1,9 +1,11 @@
-import Fetch from "./fetch";
+import Signup from "./Signup";
 
 const App = () => {
   return (
     <div>
-      <Fetch />
+      <h1>Title</h1>
+      <br />
+      <Signup />
     </div>
   );
 };
