@@ -8,7 +8,7 @@ const initialValues = {
 };
 
 const onSubmit = (value) => {
-  console.log("Form data", values);
+  console.log("Form data", value);
 };
 
 const validate = (values) => {
@@ -48,6 +48,7 @@ const YoutubeForm = () => {
           onChange={formik.handleChange}
           value={formik.values.name}
         />
+        {formik.errors.name ? <div>{formik.errors.name}</div> : null}
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -56,6 +57,7 @@ const YoutubeForm = () => {
           onChange={formik.handleChange}
           value={formik.values.email}
         />
+        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
         <label htmlFor="channel">Channel</label>
         <input
           type="text"
@@ -64,6 +66,7 @@ const YoutubeForm = () => {
           onChange={formik.handleChange}
           value={formik.values.channel}
         />
+        {formik.errors.channel ? <div>{formik.errors.channel}</div> : null}
         <button>Submit</button>
       </form>
     </div>
