@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Formik,
   Form,
@@ -22,8 +22,25 @@ const initialValues = {
   phNumbers: [""],
 };
 
-const onSubmit = (value) => {
+const savedValues = {
+  name: "adsa",
+  email: "zcvz",
+  channel: "qwee",
+  comments: "asdfafe",
+  address: "",
+  social: {
+    facebook: "",
+    twitter: "",
+  },
+  phoneNumbers: ["", ""],
+  phNumbers: [""],
+};
+
+const onSubmit = (value, onSubmitProps) => {
   // console.log("Form data", value);
+  console.log("submit props", onSubmitProps);
+  onSubmitProps.setSubmitting(false);
+  onSubmitProps.resetForm();
 };
 
 // const validate = (values) => {
@@ -60,15 +77,17 @@ const validateComments = (value) => {
 };
 
 function YoutubeForm() {
+  const [formValues, setFormValues] = useState(null);
   return (
     <div>
       <Formik
-        initialValues={initialValues}
+        initialValues={formValues || initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-        validateOnChange={false}
-        validateOnBlur={false}
-        validateOnMount
+        enableReinitialize
+        // validateOnChange={false}
+        // validateOnBlur={false}
+        // validateOnMount
       >
         {(formik) => {
           return (
@@ -209,6 +228,13 @@ function YoutubeForm() {
               <button type="submit" disable={!(formik.dirty && formik.isValid)}>
                 Submit
               </button>
+              <button type="sumbit" disable={formik.isSubmitting}>
+                Disable when submitting
+              </button>
+              <button type="button" onClick={() => setFormValues(savedValues)}>
+                Load Saved Data
+              </button>
+              <button type="reset">Reset</button>
             </Form>
           );
         }}
