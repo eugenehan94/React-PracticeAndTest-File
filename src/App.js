@@ -10,33 +10,54 @@ import {
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import Textfield from "./Component/TextField/";
+
+import { useFormik, Field, ErrorMessage } from "formik";
 const useStyles = makeStyles((theme) => ({
   fontWrapper: {
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(8),
   },
 }));
-const INITIAL_FORM_STATE = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-};
+// const INITIAL_FORM_STATE = {
+//   firstName: "",
+//   lastName: "",
+//   email: "",
+//   phone: "",
+// };
 
-const FORM_VALIDATION = Yup.object().shape({
-  firstName: Yup.string().required("Required"),
-  lastName: Yup.string().required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
-  phone: Yup.number()
-    .integer()
-    .typeError("Please enter a valid number")
-    .required("Required"),
-});
+// const FORM_VALIDATION = Yup.object().shape({
+//   firstName: Yup.string().required("Required"),
+//   lastName: Yup.string().required("Required"),
+//   email: Yup.string().email("Invalid email").required("Required"),
+//   phone: Yup.number()
+//     .integer()
+//     .typeError("Please enter a valid number")
+//     .required("Required"),
+// });
 const App = () => {
   const classes = useStyles();
+
+  const formik = useFormik({
+    initialValues: { email: "" },
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
   return (
     <div>
-      <Grid container>
+      <form onSubmit={formik.handleSubmit}>
+        <label htmlFor="email">Email Address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+        <button type="submit">Submit</button>
+      </form>
+
+      {/* <Grid container>
         <Grid item xs={12}>
           <AppBar position="static">
             <Toolbar>
@@ -83,7 +104,7 @@ const App = () => {
             </div>
           </Container>
         </Grid>
-      </Grid>
+      </Grid> */}
     </div>
   );
 };
