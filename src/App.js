@@ -61,7 +61,18 @@ const MyCheckbox = ({ children, ...props }) => {
   );
 };
 
-const MySelect = ({ label, ...props }) => {};
+const MySelect = ({ label, ...props }) => {
+  const [field, meta] = useField(props);
+  return (
+    <div>
+      <label htmlFor={props.id || props.name}>{label}</label>
+      <select {...Field} {...props} />
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
+    </div>
+  );
+};
 
 const App = () => {
   const classes = useStyles();
@@ -69,7 +80,13 @@ const App = () => {
   return (
     <div>
       <Formik
-        initialValues={{ firstName: "", lastName: "", email: "" }}
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          email: "",
+          acceptedTerms: false,
+          jobType: "",
+        }}
         validationSchema={Yup.object({
           firstName: Yup.string()
             .max(15, "Must be 15 characters or less")
@@ -80,6 +97,7 @@ const App = () => {
           email: Yup.string()
             .email("Invalid email address")
             .required("Required"),
+          acceptedTerms: Yup.Boolean(),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -101,7 +119,7 @@ const App = () => {
 
           <button type="submit">Submit</button>
         </Form>
-        )}
+        )
       </Formik>
 
       {/* <Grid container>
